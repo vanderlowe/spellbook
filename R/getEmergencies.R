@@ -3,7 +3,7 @@
 #' This function queries Financial Tracking Service for emergency information.
 #' @param country Three-letter ISO-alpha3 code of the country
 #' @return Data frame of emergencies
-#' @import RJSONIO, plyr
+#' @import RJSONIO plyr
 #' @export
 #' @examples
 #' \dontrun{

@@ -20,5 +20,9 @@ Suggests:
 Collate:
     'spellbook-package.r'
     'getEmergencies.R'
-    'plot_functions.R'
     'utilities.R'
+    'getFacebookData.R'
+    'in_and_outdegrees.R'
+    'iso_codes.R'
+    'plot.crises.R'
+    'plot.facebook.R'
