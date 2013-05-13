@@ -1,35 +1,53 @@
-#' Directed friendships
+#' Outgoing FB friendships for a country
 #' 
-#' Accesses \code{cpw_meta} database to retrieve data on new friendships relating to the target country.
+#' Accesses \code{cpw_meta} to retrieve friendships that originate from the country (i.e., outdegree).
 #' @param country Two-letter ISO code of the country
 #' @return A \code{data.frame}
-#' @import magic
+#' @import data.table magic
 #' @export
 #' @examples
 #' \dontrun{
-#' indegree("FI")}
-#' \dontrun{
 #' outdegree("FI")}
-#' #' \dontrun{
-#' domestic("FI")}
 
 outdegree <- function(country) {
-  dyads.friendship <- data.table(getFacebookData(country))
-  results <- dyads.friendship[Friender_Country == country & !Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
+  friendships <- data.table(getFacebookData(country))
+  results <- friendships[Friender_Country == country & !Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
   results$type <- "Out"
   return(results)
 }
 
+#' Incoming FB friendships for a country
+#' 
+#' Accesses \code{cpw_meta} to retrieve friendships that the country receives from other countries (i.e., indegree).
+#' @param country Two-letter ISO code of the country
+#' @return A \code{data.frame}
+#' @import data.table magic
+#' @export
+#' @examples
+#' \dontrun{
+#' indegree("FI")}
+
 indegree <- function(country) {
-  dyads.friendship <- data.table(getFacebookData(country))
-  results <- dyads.friendship[!Friender_Country == country & Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
+  friendships <- data.table(getFacebookData(country))
+  results <- friendships[!Friender_Country == country & Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
   results$type <- "In"
   return(results)
 }
 
+#' FB friendships within a country
+#' 
+#' Accesses \code{cpw_meta} to retrieve friendships within the country (i.e., domestic).
+#' @param country Two-letter ISO code of the country
+#' @return A \code{data.frame}
+#' @import data.table magic
+#' @export
+#' @examples
+#' #' \dontrun{
+#' domestic("FI")}
+
 domestic <- function(country) {
-  dyads.friendship <- data.table(getFacebookData(country))
-  results <- dyads.friendship[Friender_Country == country & Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
+  friendships <- data.table(getFacebookData(country))
+  results <- friendships[Friender_Country == country & Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
   results$type <- "Within"
   return(results)
 }

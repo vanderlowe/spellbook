@@ -1,6 +1,6 @@
 \name{outdegree}
 \alias{outdegree}
-\title{Directed friendships}
+\title{Outgoing FB friendships for a country}
 \usage{
   outdegree(country)
 }
@@ -11,15 +11,11 @@
   A \code{data.frame}
 }
 \description{
-  Accesses \code{cpw_meta} database to retrieve data on new
-  friendships relating to the target country.
+  Accesses \code{cpw_meta} to retrieve friendships that
+  originate from the country (i.e., outdegree).
 }
 \examples{
 \dontrun{
-indegree("FI")}
-\dontrun{
 outdegree("FI")}
-#' \dontrun{
-domestic("FI")}
 }
 
