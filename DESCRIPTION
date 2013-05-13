@@ -1,12 +1,24 @@
 Package: spellbook
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Author: Ilmo
+Maintainer: Ilmo van der Lowe <iv244@cam.ac.uk>
+Author: Ilmo van der Lowe
 Version: 1.0
 License: GPL-3
-Title: 
-Description: 
+Title: Spellbook
+Description: Easy access to Facebook data at Cambridge Prosociality and
+    Well-being Lab
+Imports:
+    data.table,
+    plyr,
+    RJSONIO,
+    ggplot2,
+    scales,
+    lubridate
 Suggests:
+    magic,
     testthat,
     roxygen2
 Collate:
     'spellbook-package.r'
+    'getEmergencies.R'
+    'plot_functions.R'
+    'utilities.R'

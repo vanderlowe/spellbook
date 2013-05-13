@@ -34,23 +34,3 @@ parseMonth <- function(text) {
   }
   return(NULL)
 }
-
-getISO2 <- function(iso3) {
-  return(
-    magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE ISOalpha3 = '%s'", iso3), "cpw_meta")[,1]
-    )
-}
-
-getISO3 <- function(iso2) {
-  return(
-    magicSQL(sprintf("SELECT ISOalpha3 FROM countries WHERE ISOalpha2 = '%s'", iso2), "cpw_meta")[,1]
-  )
-}
-
-getISOs <- function(iso.length) {
-  if (iso.length %in% 2:3) {
-    return(magicSQL(sprintf("SELECT ISOalpha%i FROM countries", iso.length), "cpw_meta")[,1])
-  } else {
-    stop("Only 2 and 3 are valid arguments")
-  }
-}
