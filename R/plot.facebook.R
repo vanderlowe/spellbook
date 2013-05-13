@@ -4,7 +4,7 @@
 #' @param country Two-letter ISO-alpha2 code of the country
 #' @param events An optional \code{data.frame} object with columns \code{date} (in YYYY-MM-DD format) and \code{name}, both as character strings.
 #' @return A \code{ggplot2} graph
-#' @import magic, ggplot2, scales
+#' @import magic ggplot2 scales
 #' @export
 #' @examples
 #' \dontrun{
