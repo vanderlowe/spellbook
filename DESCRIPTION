@@ -26,3 +26,4 @@ Collate:
     'iso_codes.R'
     'plot.crises.R'
     'plot.facebook.R'
+    'getDonors.R'
