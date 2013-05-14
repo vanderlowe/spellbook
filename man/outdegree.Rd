@@ -16,6 +16,7 @@
 }
 \examples{
 \dontrun{
-outdegree("FI")}
+outdegree("FI")
+}
 }
 

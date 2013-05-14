@@ -15,7 +15,8 @@
   the country (i.e., domestic).
 }
 \examples{
-#' \dontrun{
-domestic("FI")}
+\dontrun{
+domestic("FI")
+}
 }
 

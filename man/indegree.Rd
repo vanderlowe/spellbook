@@ -16,6 +16,7 @@
 }
 \examples{
 \dontrun{
-indegree("FI")}
+indegree("FI")
+}
 }
 

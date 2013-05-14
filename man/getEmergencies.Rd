@@ -17,6 +17,7 @@
 }
 \examples{
 \dontrun{
-getEmergencies("HTI")}
+getEmergencies("HTI")
+}
 }
 

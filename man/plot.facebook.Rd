@@ -21,6 +21,7 @@
 }
 \examples{
 \dontrun{
-plot.facebook("JP")}
+plot.facebook("JP")
+}
 }
 

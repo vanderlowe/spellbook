@@ -16,6 +16,7 @@
 }
 \examples{
 \dontrun{
-getFacebookData("FI")}
+getFacebookData("FI")
+}
 }
 
