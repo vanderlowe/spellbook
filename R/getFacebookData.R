@@ -3,11 +3,12 @@
 #' Accesses \code{cpw_meta} database to retrieve data on new friendships relating to the target country.
 #' @param country Two-letter ISO code of the country
 #' @return A \code{data.frame}
-#' @import magic
+#' @import magic lubridate
 #' @export
 #' @examples
 #' \dontrun{
-#' getFacebookData("FI")}
+#' getFacebookData("FI")
+#' }
 
 getFacebookData <- function(country) {
   iso.code <- iso2(country)

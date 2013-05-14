@@ -3,11 +3,12 @@
 #' This function queries Financial Tracking Service for emergency information.
 #' @param country Three-letter ISO-alpha3 code of the country
 #' @return Data frame of emergencies
-#' @import RJSONIO plyr
+#' @import RJSONIO plyr data.table
 #' @export
 #' @examples
 #' \dontrun{
-#' getEmergencies("HTI")}
+#' getEmergencies("HTI")
+#' }
 
 getEmergencies <- function(country) {
   # Define a list of expected columns

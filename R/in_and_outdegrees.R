@@ -3,11 +3,12 @@
 #' Accesses \code{cpw_meta} to retrieve friendships that originate from the country (i.e., outdegree).
 #' @param country Two-letter ISO code of the country
 #' @return A \code{data.frame}
-#' @import data.table magic
+#' @import data.table
 #' @export
 #' @examples
 #' \dontrun{
-#' outdegree("FI")}
+#' outdegree("FI")
+#' }
 
 outdegree <- function(country) {
   friendships <- data.table(getFacebookData(country))
@@ -21,11 +22,12 @@ outdegree <- function(country) {
 #' Accesses \code{cpw_meta} to retrieve friendships that the country receives from other countries (i.e., indegree).
 #' @param country Two-letter ISO code of the country
 #' @return A \code{data.frame}
-#' @import data.table magic
+#' @import data.table
 #' @export
 #' @examples
 #' \dontrun{
-#' indegree("FI")}
+#' indegree("FI")
+#' }
 
 indegree <- function(country) {
   friendships <- data.table(getFacebookData(country))
@@ -39,11 +41,12 @@ indegree <- function(country) {
 #' Accesses \code{cpw_meta} to retrieve friendships within the country (i.e., domestic).
 #' @param country Two-letter ISO code of the country
 #' @return A \code{data.frame}
-#' @import data.table magic
+#' @import data.table
 #' @export
 #' @examples
-#' #' \dontrun{
-#' domestic("FI")}
+#' \dontrun{
+#' domestic("FI")
+#' }
 
 domestic <- function(country) {
   friendships <- data.table(getFacebookData(country))

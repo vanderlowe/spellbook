@@ -25,9 +25,17 @@ insertMissingColumns <- function(df, expected.columns) {
   return(data.frame(new.columns, stringsAsFactors = F))
 }
 
+#' Guess numeric month value from a string.
+#' 
+#' Parse character strings for the presence of fully spelled month names.
+#' @param text A character string
+#' @return Numeric value between 1 and 12 for detected month.
+#' @import stringr
+#' @export
+#' @note Results will be uncertain if the text contains more than one month name.
+#' 
 parseMonth <- function(text) {
   text <- as.character(text)
-  require(stringr)
   months <- c("january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december")
   for (month in months) {
     if (str_detect(tolower(text), month)) {return(which(months == month))}

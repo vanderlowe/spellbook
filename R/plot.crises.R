@@ -4,7 +4,7 @@
 #' Additionally, the graph shows major natural disasters that occurred during that time.
 #' @param country Two- or three-letter ISO code of the country
 #' @return A \code{ggplot2} graph
-#' @import magic ggplot2 scales lubridate
+#' @import magic ggplot2
 #' @export
 #' @examples
 #' \dontrun{

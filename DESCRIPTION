@@ -15,7 +15,6 @@ Imports:
     scales,
     lubridate
 Suggests:
-    magic,
     testthat,
     roxygen2
 Collate:
