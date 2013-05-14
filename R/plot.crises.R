@@ -11,10 +11,10 @@
 #' plot.crises("HTI")}
 
 plot.crises <- function(country) {
-  country <- toupper(country)
+  country <- toupper(as.character(country))
   # Get country codes
-  iso2s <- getISOs(2)
-  iso3s <- getISOs(3)
+  iso2s <- as.character(getISOs(2))
+  iso3s <- as.character(getISOs(3))
   
   if (country %in% c(iso2s, iso3s)) {
     # Get both 2- and 3-letter ISO codes
