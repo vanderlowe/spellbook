@@ -6,8 +6,9 @@ License: GPL-3
 Title: Spellbook
 Description: Easy access to Facebook data at Cambridge Prosociality and
     Well-being Lab
+Depends:
+    data.table
 Imports:
-    data.table,
     plyr,
     RJSONIO,
     ggplot2,
