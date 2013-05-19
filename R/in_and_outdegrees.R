@@ -11,7 +11,7 @@
 #' }
 
 outdegree <- function(country) {
-  friendships <- data.table(getFacebookData(country))
+  friendships <- data.table(getFacebookData(iso2(country)))
   results <- friendships[Friender_Country == country & !Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
   results$type <- "Out"
   return(results)
@@ -30,7 +30,7 @@ outdegree <- function(country) {
 #' }
 
 indegree <- function(country) {
-  friendships <- data.table(getFacebookData(country))
+  friendships <- data.table(getFacebookData(iso(country)))
   results <- friendships[!Friender_Country == country & Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
   results$type <- "In"
   return(results)
