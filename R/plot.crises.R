@@ -18,8 +18,8 @@ plot.crises <- function(country) {
   
   if (country %in% c(iso2s, iso3s)) {
     # Get both 2- and 3-letter ISO codes
-    if (nchar(country) == 2) {iso2 <- country; iso3 <- getISO3(country)}
-    if (nchar(country) == 3) {iso2 <- getISO2(country); iso3 <- country}
+    if (nchar(country) == 2) {iso2 <- country; iso3 <- iso3(country)}
+    if (nchar(country) == 3) {iso2 <- iso2(country); iso3 <- country}
     
     events <- magicSQL(sprintf("SELECT year, month, title as name FROM emergencies WHERE ISOalpha3 = '%s' AND month IS NOT NULL AND year > 2005", iso3), "cpw_Crises")
     events$date <- paste(events$year, events$month, 15)
