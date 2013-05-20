@@ -27,3 +27,5 @@ Collate:
     'plot.crises.R'
     'plot.facebook.R'
     'getDonors.R'
+    'getDateRange.R'
+    'getDisasterPeriod.R'

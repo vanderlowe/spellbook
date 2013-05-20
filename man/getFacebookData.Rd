@@ -2,10 +2,14 @@
 \alias{getFacebookData}
 \title{Get FB data on new international and domestic friendships by country}
 \usage{
-  getFacebookData(country)
+  getFacebookData(country, where.statement = NULL)
 }
 \arguments{
-  \item{country}{Two-letter ISO code of the country}
+  \item{country}{Two- or three letter ISO code of the
+  country (or a valid country name)}
+
+  \item{where.statement}{A vector of WHERE conditions
+  amended to the query}
 }
 \value{
   A \code{data.frame}
@@ -17,6 +21,10 @@
 \examples{
 \dontrun{
 getFacebookData("FI")
+getFacebookData("FIN")
+getFacebookData("Finland")
+getFacebookData("Finland", "year = 2006")
+getFacebookData("Finland", c("year = 2006", "Count > 100"))
 }
 }
 

@@ -37,7 +37,7 @@ verifyISO2 <- function(code) {
   sql <- sprintf("SELECT ISOalpha2 FROM countries WHERE ISOalpha2 = '%s'", code)
   hits <- magicSQL(sql, "cpw_meta")
   if (nrow(hits) == 0) {
-    return(NULL)
+    stop("Could not find country.")
   } else {
     if (nrow(hits) > 1) {stop("The code returns multiple countries.")}
     return(hits$ISOalpha2)
@@ -46,13 +46,13 @@ verifyISO2 <- function(code) {
 
 getISO2byName <- function(country) {
   return(
-    as.character(magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE name = '%s'", country), "cpw_meta")[,1])
+    verifyISO2(as.character(magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE name = '%s'", country), "cpw_meta")[,1]))
   )
 }
 
 getISO2byISO3 <- function(iso3) {
   return(
-    as.character(magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE ISOalpha3 = '%s'", iso3), "cpw_meta")[,1])
+    verifyISO2(as.character(magicSQL(sprintf("SELECT ISOalpha2 FROM countries WHERE ISOalpha3 = '%s'", iso3), "cpw_meta")[,1]))
   )
 }
 
@@ -80,7 +80,7 @@ verifyISO3 <- function(code) {
   sql <- sprintf("SELECT ISOalpha3 FROM countries WHERE ISOalpha3 = '%s'", code)
   hits <- magicSQL(sql, "cpw_meta")
   if (nrow(hits) == 0) {
-    return(NULL)
+    stop("Could not find country.")
   } else {
     if (nrow(hits) > 1) {stop("The code returns multiple countries.")}
     return(hits$ISOalpha3)
