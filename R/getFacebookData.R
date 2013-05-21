@@ -20,6 +20,9 @@ getFacebookData <- function(country, where.statement = NULL) {
   and.where <- addWHERE(where.statement)
   sql <- sprintf("SELECT * FROM Friendships_Directional_Final WHERE (Friender_Country = '%s' OR Friended_Country = '%s')%s", iso.code, iso.code, and.where)
   all.dyads <- magicSQL(sql, "cpw_meta")
+  if (nrow(all.dyads) == 0) {
+    stop(sprintf("Cannot locate data for country code %s", iso.code))
+  }
   all.dyads$date <- lubridate::ymd(paste(all.dyads$Year, all.dyads$Month, 15), quiet = T)
   return(all.dyads)
 }
