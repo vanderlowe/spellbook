@@ -22,7 +22,7 @@ getDisasterPeriod <- function(country, date, offset, dummy = T, countdown = T) {
     results[results$YearMonth >= event.YearMonth, "crisis"] <- 1
   }
   
-  if (relative.time) {
+  if (countdown) {
     # Indicate 'countdown' to disaster
     results$Countdown <- NA
     results[results$YearMonth == event.YearMonth, "Countdown"] <- 0  # Set midpoint to disaster month
@@ -52,5 +52,3 @@ getDisasterPeriod <- function(country, date, offset, dummy = T, countdown = T) {
   
   return(results)
 }
-
-a <- getDisasterPeriod(country="FJ", date="2010-07-15", offset = 1, dummy = T, countdown = T)
