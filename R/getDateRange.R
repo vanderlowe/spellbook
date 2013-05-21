@@ -23,7 +23,6 @@ getDateRange <- function(country, start.date, end.date) {
     where.statement = sprintf("YearMonth BETWEEN '%s' AND '%s'",
                               start.txt, end.txt)
   )
-  
+    
   return(results)
 }
-
