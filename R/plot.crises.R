@@ -15,7 +15,7 @@ plot.crises <- function(country) {
   # Get country codes
   all.isos <- c(as.character(getISOs(2)), as.character(getISOs(3)))
   
-  if (country %in% c(iso2s, iso3s)) {
+  if (country %in% all.isos) {
     # Get both 2- and 3-letter ISO codes
     if (nchar(country) == 2) {iso2.code <- country; iso3.code <- iso3(country)}
     if (nchar(country) == 3) {iso2.code <- iso2(country); iso3.code <- country}
