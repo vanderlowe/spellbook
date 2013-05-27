@@ -12,7 +12,7 @@
 #' }
 
 plot.facebook <- function(country, events) {
-  country.name <- magicSQL(sprintf("SELECT name FROM countries WHERE ISOalpha2 = '%s'", country), "cpw_meta")[,1]
+  country.name <- magicSQL(sprintf("SELECT name FROM countries WHERE ISOalpha2 = '%s'", iso2(country)), "cpw_meta")[,1]
   plot.data <- do.call(rbind, list(indegree(country), outdegree(country), domestic(country)))
   plot.data <- plot.data[date < ymd("2012-11-01", quiet = T)]  # Remove last, incomplete data points
   
