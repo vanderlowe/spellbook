@@ -116,6 +116,6 @@ summary(fit.timexcrisis.donations.penetration)
 fit.timexcrisis.donations.penetration.log <- lm(Friendships.log ~ Countdown*Crisis + linear.time + quadratic.time + Donation.log + Penetration, data = fb.simple)
 summary(fit.timexcrisis.donations.penetration.log)
 
-# Simplest model, R = .66
+# Simplest model, R^2 = .66
 fit <- lm(Friendships.log ~ linear.time + Penetration, data = fb.simple)
 summary(fit)
