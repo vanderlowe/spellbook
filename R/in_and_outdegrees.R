@@ -11,8 +11,9 @@
 #' }
 
 outdegree <- function(country) {
-  friendships <- data.table(getFacebookData(iso2(country)))
-  results <- friendships[Friender_Country == country & !Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
+  country <- iso2(country)
+  friendships <- data.table(getFacebookData(country, sprintf("Friender_Country = '%s' AND Friended_Country != '%s'", country, country)))
+  results <- friendships[, list(Friendships = sum(Count, na.rm = T)), by = date]
   results$type <- "Out"
   return(results)
 }
@@ -30,11 +31,13 @@ outdegree <- function(country) {
 #' }
 
 indegree <- function(country) {
-  friendships <- data.table(getFacebookData(iso(country)))
-  results <- friendships[!Friender_Country == country & Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
+  country <- iso2(country)
+  friendships <- data.table(getFacebookData(country, sprintf("Friender_Country != '%s' AND Friended_Country = '%s'", country, country)))
+  results <- friendships[, list(Friendships = sum(Count, na.rm = T)), by = date]
   results$type <- "In"
   return(results)
 }
+
 
 #' FB friendships within a country
 #' 
@@ -49,8 +52,9 @@ indegree <- function(country) {
 #' }
 
 domestic <- function(country) {
-  friendships <- data.table(getFacebookData(country))
-  results <- friendships[Friender_Country == country & Friended_Country == country, list(Friendships = sum(Count, na.rm = T)), by = date]
+  country <- iso2(country)
+  friendships <- data.table(getFacebookData(country, sprintf("Friender_Country = '%s' AND Friended_Country = '%s'", country, country)))
+  results <- friendships[, list(Friendships = sum(Count, na.rm = T)), by = date]
   results$type <- "Within"
   return(results)
 }
