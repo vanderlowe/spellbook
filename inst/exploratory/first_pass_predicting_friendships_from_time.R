@@ -3,6 +3,8 @@ require(spellbook)
 require(testthat)
 require(data.table)
 require(ggplot2)
+require(lme4)
+require(pbkrtest)
 
 options(scipen = 999)
 
@@ -119,3 +121,28 @@ summary(fit.timexcrisis.donations.penetration.log)
 # Simplest model, R^2 = .66
 fit <- lm(Friendships.log ~ linear.time + Penetration, data = fb.simple)
 summary(fit)
+
+# Multilevel model
+multi.baseline <- lmer(
+  Friendships.log ~ 
+    linear.time + 
+    quadratic.time + 
+    Countdown + 
+    (1|Disaster_id) + 
+    (1|Country), 
+  data = fb.simple
+)
+
+
+multi.crisis <- lmer(
+  Friendships.log ~ 
+    linear.time + 
+    quadratic.time + 
+    Countdown*Crisis + 
+    (linear.time|Disaster_id) + 
+    (1|Country), 
+  data = fb.simple
+)
+
+# http://seriousstats.wordpress.com/2013/04/18/using-multilevel-models-to-get-accurate-inferences-for-repeated-measures-anova-designs/
+KRmodcomp(multi.crisis, multi.baseline)
