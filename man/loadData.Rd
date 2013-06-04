@@ -5,6 +5,7 @@
   loadData(filename)
 }
 \description{
-  Download and re-install \code{spellbook}.
+  Runs scripts located in \code{inst/extdata}. These
+  scripts reconstruct key data for easy (re)use.
 }
 
