@@ -4,7 +4,7 @@ Author: Ilmo van der Lowe
 Version: 1.0
 License: GPL-3
 Title: Spellbook
-Description: Easy access to Facebook data at Cambridge Prosociality and Well-being Lab
+Description: Easy access to Facebook and UN data hosted by Cambridge Prosociality and Well-being Lab
 Depends:
     data.table,
     magic
