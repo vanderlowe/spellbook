@@ -7,7 +7,8 @@ Title: Spellbook
 Description: Easy access to Facebook data at Cambridge Prosociality and
     Well-being Lab
 Depends:
-    data.table
+    data.table,
+    magic
 Imports:
     plyr,
     RJSONIO,
