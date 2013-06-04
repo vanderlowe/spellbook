@@ -2,7 +2,8 @@
 \alias{getDisasterPeriod}
 \title{Fetch before—after data for a natural disaster}
 \usage{
-  getDisasterPeriod(country, date, offset, dummy = T)
+  getDisasterPeriod(country, date, offset, dummy = T,
+    countdown = T)
 }
 \arguments{
   \item{country}{Two- or three-letter ISO alpha code or

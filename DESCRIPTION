@@ -29,3 +29,4 @@ Collate:
     'getDonors.R'
     'getDateRange.R'
     'getDisasterPeriod.R'
+    'reset.R'
