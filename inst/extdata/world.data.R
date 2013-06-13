@@ -16,7 +16,7 @@ test_that("World data passes basic assumptions", {
     all( # Country and capital names are strings
       class(world.data$name) == "character",
       class(world.data$capital) == "character"
-    )  
+    )
   )
   
   expect_true(
