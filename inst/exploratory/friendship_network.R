@@ -44,6 +44,7 @@ for (thisCountry in recipients) {
   }  
 }
 
+world.data <- data.table(countries())
 included.countries <- unique(c(as.character(ties$to), as.character(ties$from)))
 nodes <- world.data[ISOalpha2 %in% included.countries, list(iso2 = ISOalpha2, name, region, x = capital_longitude, y = capital_latitude)]
 
@@ -55,7 +56,7 @@ pdf("international_friends_2006-2012.pdf", width = 25, height = 19)
     my.pal <- brewer.pal(n = 8, name="Set1")
     
       plot(g,
-         layout = as.matrix(cbind(nodes$x, nodes$y)),
+         layout = as.matrix(cbind(nodes$x, nodes$y)),  # Get co-ordinates from vertex attributes
          vertex.label = V(g)$name,
          vertex.label.family = "sans",
          vertex.label.color = "black",
@@ -63,6 +64,7 @@ pdf("international_friends_2006-2012.pdf", width = 25, height = 19)
          vertex.color=my.pal[as.factor(V(g)$region)],
          vertex.size = 3,
          edge.arrow.size = 0.75,
+         edge.width = 0.1,
          edge.color = "black"
       )
     title(thisYear)
