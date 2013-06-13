@@ -8,6 +8,9 @@ setkey(donor.count, "emergency_id")
 crises <- merge(crises, donor.count)
 rm(donor.count)
 
+crises <- crises[, list(emergency_id, target_country = iso2, year = year, month = month, total_funding = funding)]  # Keep only relevant columns; rename for consistency
+setkeyv(crises, c("emergency_id", "target_country", "year", "month"))
+
 test_that("Emergency-level data passes basic assumptions", {
   expect_true( # All ISO2 codes are valid
     all(crises$iso2 %in% getISOs(2)))
