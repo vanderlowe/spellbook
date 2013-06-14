@@ -13,17 +13,11 @@ setkeyv(crises, c("emergency_id", "target_country", "year", "month"))
 
 test_that("Emergency-level data passes basic assumptions", {
   expect_true( # All ISO2 codes are valid
-    all(crises$iso2 %in% getISOs(2)))
-  
-  expect_true( # All ISO3 codes are valid
-    all(crises$iso3 %in% getISOs(3)))
+    all(crises$target_country %in% getISOs(2)))
   
   expect_true( # No missing ISO2 codes
-    all(!is.na(crises$iso2)))
-  
-  expect_true( # No missing ISO3 codes
-    all(!is.na(crises$iso3)))
-  
+    all(!is.na(crises$target_country)))
+    
   expect_true( # No future years
     max(crises$year) <= 2013)
   
@@ -35,7 +29,7 @@ test_that("Emergency-level data passes basic assumptions", {
   )
   
   expect_true( # No negative funding
-    min(crises$funding) >= 0)
+    min(crises$total_funding) >= 0)
   
   expect_true( # There are more disasters than countries
     length(unique(crises$emergency_id)) >= length(unique(crises$iso2))) 
