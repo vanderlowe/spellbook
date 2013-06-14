@@ -17,7 +17,7 @@ getGDPfromWorldBank <- function(iso.code, start.year = 2006, end.year = 2012) {
   # Fetch JSON from Financial Tracking Service website
   json_file <- sprintf("http://api.worldbank.org/countries/%s/indicators/NY.GDP.MKTP.CD?date=%i:%i&format=json", iso.code, start.year, end.year)
   json_data <- try(fromJSON(paste(readLines(json_file, warn = F), collapse="")), silent = T)
-  if (class(json_data) == "try-error") {
+  if (class(json_data) == "try-error" | is.null(json_data[2])) {
     results <- data.table(country = iso.code, year = seq(start.year,end.year), GDP = NA)
     return(results)
   }
