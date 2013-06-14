@@ -41,21 +41,36 @@ donations.by.country <- donations[, list(total_amount = sum(amount)), by = sourc
 # Merge friendships with donations
 friendships.with.donations <- merge(incoming.friendships, donations, by = c("emergency_id", "source_country"), all.x = T, all.y = T)
 setkeyv(friendships.with.donations, c("emergency_id", "target_country", "year", "month", "source_country"))
+friendships.with.donations[is.na(amount), amount := 0]  # Change NAs to zeros for no donation
 test_that("The data is of expected size", {
   expect_equal(nrow(incoming.friendships), nrow(friendships.with.donations))
 })
 
 # Merge crises with friendships and donations data
 crises <- merge(crises, friendships.with.donations, by = c("emergency_id", "target_country", "year", "month"), all.x = T, all.y = T)
-setkeyv(crises.with.friendships, c("emergency_id", "target_country", "year", "month", "source_country"))
+setkeyv(crises, c("emergency_id", "target_country", "year", "month", "source_country"))
+
+# Merge national level data
+gdp.data <- lapply(allCountries()$source_country, getGDPfromWorldBank)
+country.data.timeseries <- data.table(magicSQL("SELECT Code AS country, Year as year, GDP, GDP_PPP, InternetUsers, Population FROM countries_by_year", "cpw_meta"))
+# First, merge target_country data
+setnames(country.data.timeseries, names(country.data.timeseries), gsub("^country$", "target_country", names(country.data.timeseries)))
+setkeyv(country.data.timeseries, c("target_country", "year"))
+merge(crises, country.data.timeseries)
 
 # Step 5: Calculate percentages
+test_that("All emergencies have received some donations (so that division by zero does not occur)", {
+  expect_true(min(crises$total_funding) > 0)
+})
+crises[, fund_percent := amount/total_funding, by = c("emergency_id", "target_country", "year", "month", "source_country")]
 
-# Step 6: National level data
-country.data.timeseries <- data.table(magicSQL("SELECT Code AS country, Year, GDP, GDP_PPP, InternetUsers, Population FROM countries_by_year", "cpw_meta"))
+test_that("All target countries have received some friendships (so that division by zero does not occur)", {
+  expect_true(min(crises$total_friendships) > 0)
+})
+crises[, friend_percent := friendships/total_friendships, by = c("emergency_id", "target_country", "year", "month", "source_country")]
 
 require(ggplot2)
-ggplot(all, aes(x = log(donor_friend_percent), y = log(funding_percent), group = emergency_id, color = target_country)) + geom_point(alpha = .4)
+ggplot(crises, aes(x = log(friend_percent + 1), y = log(fund_percent + 1))) + geom_point(alpha = .4)
 
 cor.test(log(all$funding_percent), log(all$donor_friend_percent), use = "complete.obs")
 

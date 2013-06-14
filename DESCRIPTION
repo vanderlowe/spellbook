@@ -17,6 +17,7 @@ Imports:
     scales,
     lubridate
 Suggests:
+    devtools
 Collate:
     'spellbook-package.r'
     'getEmergencies.R'
@@ -32,3 +33,4 @@ Collate:
     'reinstall.R'
     'allCountries.R'
     'getGlobalIncomingFacebookRelationsByDisaster.R'
+    'getGDPfromWorldBank.R'
