@@ -10,6 +10,7 @@
 #' 
 getGDPfromWorldBank <- function(iso.code, start.year = 2006, end.year = 2012) {
   iso.code <- iso2(iso.code)
+  cat(iso.code, "\n")
   # Define a list of expected columns
   cols <- c("indicator", "country", "decimal", "date", "value")
   
