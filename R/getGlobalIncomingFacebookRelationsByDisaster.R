@@ -30,7 +30,7 @@ getGlobalIncomingFacebookRelationsByDisaster <- function(id) {
   results <- try(getFacebookData(iso.code, where), silent = T)
   if (class(results) == "try-error") {
     # Query returned no data, return 0 for all countries
-    results <- data.table(source_country = allCountries(), friendships = 0)
+    results <- data.table(source_country = allCountries()$source_country, friendships = 0)
   } else {
     results <- data.table(results)
     results <- results[, list(source_country = Friender_Country, friendships = Count)]
