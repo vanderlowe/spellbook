@@ -30,16 +30,28 @@ getGlobalIncomingFacebookRelationsByDisaster <- function(id) {
   results <- try(getFacebookData(iso.code, where), silent = T)
   if (class(results) == "try-error") {
     # Query returned no data, return 0 for all countries
-    results <- data.table(source_country = allCountries()$source_country, friendships = 0)
+    results <- data.table(target_country = iso.code, source_country = allCountries()$source_country, friendships = 0)
+    setkeyv(results, c("target_country", "source_country"))
   } else {
     results <- data.table(results)
-    results <- results[, list(source_country = Friender_Country, friendships = Count)]
-    setkey(results, "source_country")
+    results <- results[, list(target_country = Friended_Country, source_country = Friender_Country, friendships = Count)]
+    setkeyv(results, c("target_country", "source_country"))
     
     # Merge results with all world countries to ensure 251 rows
-    results <- merge(allCountries(), results, all.x = T, by = "source_country")
+    world <- data.table(target_country = iso.code, source_country = allCountries()$source_country)
+    setkeyv(world, c("target_country", "source_country"))
+    
+    results <- merge(world, results, all.x = T, by = c("target_country", "source_country"))
     results[is.na(friendships), friendships := 0]  # Turn missing data to zeroes
   }
+  
+  # Add relevant data
+  key.data <- data.table(emergency_id = id, year = year, month = month, target_country = iso.code)
+  setkey(key.data, "target_country")
+  
+  results <- merge(key.data, results, by = "target_country")
+  
   if (nrow(results) != 251) {stop("Results do not have 251 rows. This was an unexpected error: you have some debugging to do.")}
+  
   return(as.data.frame(results))
 }
