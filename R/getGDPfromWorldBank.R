@@ -2,7 +2,7 @@
 #' 
 #' This function gets the GDP data for a given country indicated in present-day US dollars.
 #' @export
-#' @import RJSONIO data.table
+#' @import RJSONIO data.table plyr
 #' @param iso.code ISO alpha 2 code for the country
 #' @param start.year Optional start year (default is 2006)
 #' @param end.year Optional end year (default is 2012)
