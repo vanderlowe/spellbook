@@ -2,6 +2,15 @@
 crises <- data.table(magicSQL("SELECT id AS emergency_id, ISOalpha2 AS iso2, ISOalpha3 AS iso3, year, month, title, funding, pledges FROM emergencies WHERE month IS NOT NULL AND type = 'Natural Disaster'", "cpw_Crises"))
 setkey(crises, "emergency_id")
 
+# Mark unreliable data
+crises$drop <- 0
+crises[year == 2006 & month < 5, drop := 1]  # Exclude anything before May 2006 (start of reliable Facebook data)
+crises[year == 2012 & month > 11, drop := 1]  # Exclude anything after Nov 2012 (end of reliable Facebook data)
+
+# Drop unreliable data
+crises <- subset(crises, drop == 0)
+crises$drop <- NULL
+
 # Merge donor count information
 donor.count <- data.table(magicSQL("SELECT emergency_id, COUNT(donor) as Donors FROM donations GROUP BY emergency_id", "cpw_Crises"))
 setkey(donor.count, "emergency_id")
