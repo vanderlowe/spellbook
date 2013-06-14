@@ -37,9 +37,9 @@ getGlobalIncomingFacebookRelationsByDisaster <- function(id) {
     setkey(results, "source_country")
     
     # Merge results with all world countries to ensure 251 rows
-    results <- merge(allCountries(), results, all.x = T)
+    results <- merge(allCountries(), results, all.x = T, by = "source_country")
     results[is.na(friendships), friendships := 0]  # Turn missing data to zeroes
   }
-  
-  return(results)
+  if (nrow(results) != 251) {stop("Results do not have 251 rows. This was an unexpected error: you have some debugging to do.")}
+  return(as.data.frame(results))
 }
