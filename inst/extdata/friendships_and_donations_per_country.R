@@ -92,8 +92,3 @@ crises <- crises[amount > 0, ]
 # crises <- crises[!source_country %in% exclude,]
 
 # At this stage, the crises data.table is ready.
-test_that("Crises contains expected number of rows", {
-  emergency.count <- length(crisis.ids)
-  country.count <- nrow(allCountries())
-  expect_equal(nrow(crises), country.count * emergency.count)
-})
